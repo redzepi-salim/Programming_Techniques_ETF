@@ -3,47 +3,17 @@
 
 
 
-Definirajte i implementirajte klasu “Ugao” (ili “Kut”, u skladu s Vašim jezičkim opredjeljenjem) koja 
-omogućava rad s uglovima (kutovima) u ravni. Klasa treba da ima sljedeći interfejs:   
-Ugao(double radijani = 0);  
-Ugao(int stepeni, int minute, int sekunde);  
-void Postavi(double radijani);  
-void Postavi(int stepeni, int minute, int sekunde); 
- double DajRadijane() const;  
- void OcitajKlasicneJedinice(int &stepeni, int &minute, int &sekunde);  
- int DajStepene() const;  
- int DajMinute() const;  
- int DajSekunde() const;  
- void Ispisi() const;  
- void IspisiKlasicno() const;  
- Ugao &SaberiSa(const Ugao &u);  
- Ugao &PomnoziSa(double x);  
- friend Ugao ZbirUglova(const Ugao &u1, const Ugao &u2);  
- friend Ugao ProduktUglaSaBrojem(const Ugao &u, double x);   
- Konstruktor s jednim parametrom postavlja vrijednost ugla u radijanima (ovaj parametar ima podrazumijevanu 
- vrijednost 0 što omogućava da se ovaj konstruktor koristi i kao konstruktor bez parametara, pri čemu se 
- kreira prazan ugao od 0 radijana), dok konstruktor s tri parametra postavlja vrijednost ugla u 2
- stepenima, minutama i sekundama. Pri tome se svi uglovi reduciraju na opseg od 0 do 2π odnosno od 0 do 
- 360 ° tako da se, na primjer, ugao od 5π/2 odnosno 450 ° automatski reducira na vrijednost π/2 odnosno 
- 90 °, dok se ugao od −π/4 odnosno −45 ° automatski reducira na vrijednost 315 ° odnosno 7π/4. 
- Konstruktor s jednim parametrom treba podržavati automatsku konverziju realnih brojeva u objekte tipa 
- “Ugao” (ili “Kut”). Dvije metode “Postavi” (s jednim i tri parametra) obavljaju isti posao kao i 
- konstruktori s jednim odnosno tri parametra respektivno, a služe za naknadnu promjenu ugla. Metoda 
- “DajRadijane” vraća vrijednost ugla izraženu u radijanima. Metoda “OcitajKlasicneJedinice” očitava 
- vrijednost ugla u stepenima, minutama i sekundama i smješta očitane vrijednosti u odgovarajuće parametre 
- metode. Metode “DajStepene”, “DajMinute” i “DajSekunde” omogućavaju da se istim ovim informacijama 
- pristupi neovisno, a ne isključivo “u paketu”. Metoda “Ispisi” ispisuje vrijednost ugla u radijanima, 
- dok metoda “IspisiKlasicno” ispisuje vrijednost ugla u stepenima, minutama i sekundama u obliku poput 
- “23deg 8min 47sec”. Metoda “SaberiSa” dodaje ugao zadan parametrom na ugao nad kojim je primijenjena i 
- usput vraća kao rezultat tako modificiran ugao. Metoda “PomnoziSa” množi ugao nad kojim je primijenjena 
- s brojem koji je zadan parametrom i usput vraća kao rezultat tako modificiran ugao. Obje ove metode 
- trebaju obezbijediti da nakon izvršene operacije rezultat bude reduciran na opseg 0 − 2π (0 − 360 °). 
- Konačno, dvije prijateljske funkcije “ZbirUglova” i “ProduktUglaSaBrojem” vraćaju kao rezultat novi ugao 
- koji je jednak zbiru uglova zadanih parametrima, odnosno produktu ugla i broja koji su zadani putem 
- parametara. Implementaciju klase treba zasnovati na jednom privatnom atributu koji čuva vrijednost ugla 
- u radijanima (realan broj). Napišite i kratki testni program u kojem ćete demonstrirati da svi elementi 
- napisane klase rade u skladu sa specifikacijama. Posebno treba provjeriti da li radi sabiranje objekata 
- tipa “Ugao” (ili “Kut”) s realnim brojem.
+Klase “Vektor3d” iz zadataka 1, 2 i 3 s prethodnog tutorijala, imaju nekoliko nedostataka. Na prvom mjestu, 
+objekti tipa “Vektor3d” rađaju se s nasumičnim početnim sadržajem, Proširite klasu iz Zadatka 3. s 
+prethodnog tutorijala konstruktorom bez parametara koji kreira vektor čije su sve tri koordinate postavljene 
+na 0, kao i konstruktorom s tri parametra koji obavlja istu funkciju kao i “Postavi” s tri parametra, samo 
+odmah pri kreiranju objekta. Dalje, brojanje ispisa je imalo “bag” (koji tada nismo znali ispraviti) što 
+pri kopiranju objekta, novokreirana kopija nasljeđuje brojač ispisa od svog originala. Recimo, ako se 
+izvrši nešto poput   
+Vektor3d v1; v1.Postavi(1,2,3); v1.Ispisi(); v1.Ispisi(); v1.Ispisi()  
+Vektor3d v2(v1); v2.Ispisi(); v2.Ispisi();   tada će poziv “v2.DajBrojIspisa()” 
+dati vrijednost 5, iako je objekat “v2” ispisan samo dva puta. Izvršite korekcije koje su potrebne da se 
+ispravi ovaj bag (odgovor kako to uraditi krije se u elementima koji su uvedeni na Predavanju 10). 
 */
 #include <iostream>
 #include <cmath>
